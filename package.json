@@ -2,13 +2,13 @@
   "name": "cherry",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon -e js,ejs,json app.js"
+    "dev": "nodemon -e js,ejs,json src/app.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ahmed Mahmud",
+  "license": "MIT",
   "dependencies": {
     "@catppuccin/tailwindcss": "^0.1.1",
     "ejs": "^3.1.9",
@@ -17,11 +17,5 @@
     "postcss": "^8.4.21",
     "puppeteer": "^19.8.3",
     "tailwindcss": "^3.3.1"
-  },
-  "devDependencies": {
-    "@tailwindcss/oxide": "^0.0.0-insiders.8fb9ae8f",
-    "browserslist": "^4.21.5",
-    "lightningcss": "^1.19.0",
-    "pkg": "^5.8.1"
   }
 }

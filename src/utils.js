@@ -31,6 +31,8 @@ const path = require("path");
  * @typedef {Object} Config
  * @property {string} theme - The theme of the cheatsheet.
  * @property {string} title - The title of the cheatsheet.
+ * @property {number} columns - Number of columns wide.
+ * @property {number} width - Width in pixels of the output.
  * @property {Category[]} categories - An array of categories.
  */
 
@@ -100,7 +102,7 @@ const screenshot = async (options) => {
     // Set the HTML content of the page
     await page.setContent(html);
 
-    await page.setViewport({ width: 800, height: 600, deviceScaleFactor: 10 });
+    await page.setViewport({ width: options.width, height: 600, deviceScaleFactor: 10 });
     
     // Wait for the selector and fonts to load
     await page.waitForSelector(selector);

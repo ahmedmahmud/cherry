@@ -7,7 +7,9 @@ const { generate } = require('./utils.js');
 const app = express();
 
 const default_opts = {
-    theme: "macchiato",
+  theme: "macchiato",
+  columns: 3,
+  width: 800,
   title: "Hyprland Cheatsheet",
   categories: [
     {

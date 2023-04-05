@@ -1,10 +1,14 @@
 <div id="sheet" class="w-full h-full p-8 bg-crust font-mono">
     <h1 class="text-5xl mb-12 text-text text-center underline underline-offset-8"><%= title %></h1>
-    <div class="columns-3 gap-8 space-y-8">
+    <div class="columns-<%= columns %> gap-8 space-y-8">
         <% categories.forEach((category) => { %>
+            <%
+                const colors = ['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            %>
             <div class="bg-mantle break-inside-avoid-column">
                 <div class="flex items-center">
-                    <div class="mx-auto bg-pink py-2 px-3 inline-block">
+                    <div class="mx-auto bg-<%= randomColor %> py-2 px-3 inline-block">
                         <p class="text-mantle"><%= category.name %></p>
                     </div>
                 </div>

@@ -1,0 +1,43 @@
+{
+    "title": "Cherry",
+    "theme": "mocha",
+    "columns": 2,
+    "width": 600,
+    "categories": [
+        {
+            "name": "general",
+            "binds": [
+                {
+                    "description": "enter command mode",
+                    "key": ";"
+                },
+                {
+                    "description": "move window",
+                    "key": "ctrl"
+                },
+                {
+                    "description": "screenshot",
+                    "key": "x"
+                }
+            ]
+        },
+        {
+            "name": "wow",
+            "binds": [
+                {
+                    "description": "reload",
+                    "key": "ctrl + r"
+                }
+            ]
+        },
+        {
+            "name": "actions",
+            "binds": [
+                {
+                    "description": "toggle floating",
+                    "key": "t"
+                }
+            ]
+        }
+    ]
+}

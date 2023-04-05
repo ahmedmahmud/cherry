@@ -1,6 +1,5 @@
 {
   "name": "cherry",
-  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@catppuccin/tailwindcss": "^0.1.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "nodemon": "^2.0.22",
@@ -18,6 +18,9 @@
     "tailwindcss": "^3.3.1"
   },
   "devDependencies": {
-    "@catppuccin/tailwindcss": "^0.1.1"
+    "@tailwindcss/oxide": "^0.0.0-insiders.8fb9ae8f",
+    "browserslist": "^4.21.5",
+    "lightningcss": "^1.19.0",
+    "pkg": "^5.8.1"
   }
 }

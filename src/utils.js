@@ -1,50 +1,21 @@
-import { renderFile } from 'ejs';
-import tailwind from "tailwindcss";
-import postcss from "postcss";
-import tailwindcss from "@catppuccin/tailwindcss";
-import puppeteer from 'puppeteer';
+const fs = require('fs');
+const puppeteer = require('puppeteer');
+const ejs = require('ejs');
+const postcss = require('postcss');
+const tailwind = require('tailwindcss');
+const tailwindcss = require('@catppuccin/tailwindcss');
+const path = require("path");
 
-const generate = async () => {
-    const cheatsheet = await renderFile("src/cheatsheet.ejs", {
-        title: "Hyprland Cheatsheet",
-        blocks: [
-            {
-                title: "general",
-                binds: [
-                    {
-                        description: "enter command mode",
-                        key: ";"
-                    },
-                    {
-                        description: "move window",
-                        key: "ctrl+arrow"
-                    },
-                    {
-                        description: "enter command mode",
-                        key: ";"
-                    },
-                ]
-            },
-            {
-                title: "wow",
-                binds: [
-                    {
-                        description: "enter command mode",
-                        key: ";"
-                    },
-                ]
-            },
-            {
-                title: "general",
-                binds: [
-                    {
-                        description: "enter command mode",
-                        key: ";"
-                    },
-                ]
-            },
-        ]
-    });
+// import { renderFile } from 'ejs';
+// import tailwind from "tailwindcss";
+// import postcss from "postcss";
+// import tailwindcss from "@catppuccin/tailwindcss";
+// import puppeteer from "puppeteer";
+// import fs from "fs";
+// import path from "path";
+
+const generate = async (options) => {
+    const cheatsheet = await ejs.renderFile(path.join(__dirname, "/cheatsheet.ejs"), options);
 
     const result = await postcss([
         tailwind({
@@ -84,8 +55,8 @@ const generate = async () => {
     return html;
 }
 
-const screenshot = async () => {
-    const html = await generate();
+const screenshot = async (options) => {
+    const html = await generate(options);
     const selector = '#sheet';
   
     const browser = await puppeteer.launch();
@@ -118,4 +89,23 @@ const screenshot = async () => {
     await browser.close();
 }
 
-export { generate, screenshot };
+const process_args = () => {
+    // Get the command-line arguments
+    const args = process.argv.slice(2);
+
+    // Check if a filename was passed
+    if (args.length !== 1) {
+        console.error('Please provide a JSON file for generation');
+        process.exit(1);
+    }
+
+    // Read the file contents as a string
+    const filename = args[0];
+    const fileContents = fs.readFileSync(filename, 'utf8');
+
+    // Parse and return the JSON data
+    return JSON.parse(fileContents);
+}
+
+module.exports = { generate, screenshot, process_args };
+// export = { generate, screenshot, process_args };

@@ -14,15 +14,44 @@ const path = require("path");
 // import fs from "fs";
 // import path from "path";
 
+/**
+ * @typedef {Object} Bind
+ * @property {string} description - The description of the keybind.
+ * @property {string} key - The key bind.
+ */
+
+
+/**
+ * @typedef {Object} Category
+ * @property {string} name - The category name.
+ * @property {Bind[]} binds - The key binds of this category
+ */
+
+/**
+ * @typedef {Object} Config
+ * @property {string} theme - The theme of the cheatsheet.
+ * @property {string} title - The title of the cheatsheet.
+ * @property {Category[]} categories - An array of categories.
+ */
+
+
+/**
+ * Generates a cheatsheet HTML string from the given data object.
+ *
+ * @param {Config} options - The config object to use for generating the cheatsheet.
+ * @returns {Promise<string>} - A Promise that resolves to the generated HTML string.
+ */
 const generate = async (options) => {
     const cheatsheet = await ejs.renderFile(path.join(__dirname, "/cheatsheet.ejs"), options);
 
+    // @ts-ignore
     const result = await postcss([
+        // @ts-ignore
         tailwind({
             content: [{ raw: cheatsheet, extension: "html" }],
             plugins: [
                 tailwindcss({
-                  defaultFlavour: 'macchiato'
+                  defaultFlavour: options.theme
                 }),
               ],
               theme: {
@@ -55,6 +84,12 @@ const generate = async (options) => {
     return html;
 }
 
+/**
+ * Generates a screenshot of a cheatsheet based off the provided config.
+ *
+ * @param {Config} options - The config object to use for generating the cheatsheet.
+ * @returns {Promise<void>} Image is saved as a side-effect.
+ */
 const screenshot = async (options) => {
     const html = await generate(options);
     const selector = '#sheet';
@@ -83,12 +118,17 @@ const screenshot = async (options) => {
         width: box.width,
         height: box.height,
       },
-      path: 'screenshot.png',
+      path: 'output.png',
     });
   
     await browser.close();
 }
 
+/**
+ * Extracts config object from a provided JSON file path.
+ *
+ * @returns {Config} - Image is saved as a side-effect.
+ */
 const process_args = () => {
     // Get the command-line arguments
     const args = process.argv.slice(2);
@@ -102,6 +142,8 @@ const process_args = () => {
     // Read the file contents as a string
     const filename = args[0];
     const fileContents = fs.readFileSync(filename, 'utf8');
+
+    // TODO: Check/verify config properties...
 
     // Parse and return the JSON data
     return JSON.parse(fileContents);

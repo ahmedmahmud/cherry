@@ -7,10 +7,11 @@ const { generate } = require('./utils.js');
 const app = express();
 
 const default_opts = {
+    theme: "macchiato",
   title: "Hyprland Cheatsheet",
-  blocks: [
+  categories: [
     {
-      title: "general",
+      name: "general",
       binds: [
         {
           description: "enter command mode",
@@ -27,7 +28,7 @@ const default_opts = {
       ]
     },
     {
-      title: "wow",
+      name: "wow",
       binds: [
         {
           description: "enter command mode",
@@ -36,7 +37,7 @@ const default_opts = {
       ]
     },
     {
-      title: "general",
+      name: "general",
       binds: [
         {
           description: "enter command mode",

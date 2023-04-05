@@ -1,0 +1,8 @@
+<div id="sheet" class="w-full h-full p-8 bg-crust font-mono">
+    <h1 class="text-5xl mb-12 text-text text-center underline underline-offset-8"><%= title %></h1>
+    <div class="columns-3 gap-8 space-y-8">
+        <% blocks.forEach((block) => { %>
+            <%- include('block', { block }); %>
+        <% }); %>
+    </div>
+</div>
